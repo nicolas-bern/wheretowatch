@@ -1,12 +1,28 @@
 const express = require('express')
 const app = express()
+const port = 8081
 const { v4: uuidv4} = require('uuid')
-uuidv4()
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
 
 app.get('/', (req, res) => {
-    console.log(uuidv4())
-    res.send("Hello world !")
+    res.send("Hello world ! ")
 })
 
-app.listen(8081)
+app.post('/newuser', (req, res) => {
+    let User = require('./models/user')
+
+    let nom = req.body.nom
+    let prenom = req.body.prenom
+    let email = req.body.email
+    let mdp = req.body.mdp
+    User.createUser(nom, prenom, email, mdp)
+
+    res.json(req.body)
+    res.status(200)
+})
+
+app.listen(port, function (){
+    console.log("Server running on port " + port)
+})
