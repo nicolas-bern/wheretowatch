@@ -19,8 +19,7 @@ app.post('/newuser', (req, res) => {
     let mdp = req.body.mdp
     User.createUser(nom, prenom, email, mdp)
 
-    res.json(req.body)
-    res.status(200)
+    res.json(req.body).status(200)
 })
 
 app.listen(port, function (){
