@@ -1,7 +1,8 @@
 let db = require('../database');
-let { v4: uuidv4} = require('uuid');
+let { v4: uuidv4 } = require('uuid');
 
 class User{
+
 
     static createUser(nom, prenom, email, mdp){
         let query = 'INSERT INTO USER(idUser, nom, prenom, email, mdp, dateInscription) VALUE (?, ?, ?, ?, ?, ?)'
@@ -25,7 +26,9 @@ class User{
         let query = 'SELECT * FROM USER WHERE idUser = ?'
         let value = [id]
 
-        db.query(query, value)
+        db.query(query, value).then((rows) =>{
+            console.log(rows)
+        })
     }
 
     static deleteUser(id){
