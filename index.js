@@ -14,23 +14,24 @@ app.get('/', (req, res) => {
  * Récupération d'un utilisateur par un id
  */
 app.get('/user/:id', ((req, res) => {
-    let User = require('./models/user')
-
+    let Userjs = require('./models/user')
     let id = req.params.id
+    let User = new Userjs()
 
-    let result = User.getUserById(id)
-    console.log(result[1])
-    for (let i = 0; i < result.length; i++) {
-        console.log(result[i])
-    }
+    User.getUserById(id)
 
-    //console.log("Récupération user : " + result)
-    if(result != undefined){
-        res.send(result).status(200)
-        //console.log("récupération user :" + result)
-    } else {
-        console.log(res.status(404).end)
-    }
+    setTimeout(() => {
+        console.log(User)
+        if(User != undefined){
+            res.send(User).status(200)
+        } else {
+            console.log(res.status(404).end)
+        }
+
+    }, 300);
+
+
+
 }))
 
 /**

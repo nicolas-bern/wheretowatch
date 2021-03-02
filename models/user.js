@@ -35,19 +35,19 @@ class User{
      * Méthode pour récupérer un utilisateur avec son id
      * @param id
      */
-    static getUserById(id){
-        let user = []
+      getUserById(id){
         let query = 'SELECT * FROM USER WHERE idUser = ?'
         let value = [id]
-
         db.query(query, value).then((rows) =>{
-            user.push(rows[0].idUser)
-            user.push(rows[0].nom)
-            user.push(rows[0].prenom)
-            user.push(rows[0].email)
-            user.push(rows[0].dateInscription)
+
+            this.idUser = rows[0].idUser
+            this.nom = rows[0].nom
+            this.prenom = rows[0].prenom
+            this.email = rows[0].email
+            this.dateInscription = rows[0].dateInscription
+
         })
-        return user
+
     }
 
     static deleteUser(id){
@@ -56,6 +56,7 @@ class User{
 
         db.query(query, value)
     }
+
 }
 
 module.exports = User
