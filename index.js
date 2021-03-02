@@ -45,19 +45,17 @@ app.put('/modifuser/:id', ((req, res) => {
     let prenom = req.body.prenom
     let email = req.body.email
     let mdp = req.body.mdp
-    User.modifUser(id, nom, prenom, email, mdp)
+    User.getUserById(id)
 
     setTimeout(() => {
         console.log(User)
-        if(User != undefined){
-            res.send("Modification terminé").status(200)
+        if(User.idUser != undefined){
+            User.modifUser(id, nom, prenom, email, mdp)
+            res.json(req.body).status(200)
         } else {
             res.send("L'utilisateur " + id + " n'existe pas").status(404)
         }
     }, 300);
-
-
-
 }))
 
 /**
@@ -70,9 +68,12 @@ app.post('/newuser', (req, res) => {
     let prenom = req.body.prenom
     let email = req.body.email
     let mdp = req.body.mdp
-    User.createUser(nom, prenom, email, mdp)
-
-    res.json(req.body).status(200)
+    if(nom == "" || prenom == "" || email == "" || mdp == ""){
+        res.send("Veuillez remplir toutes les informations nécessaires")
+    } else {
+        User.createUser(nom, prenom, email, mdp)
+        res.json(req.body).status(200)
+    }
 })
 
 
