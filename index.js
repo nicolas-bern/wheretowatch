@@ -11,18 +11,23 @@ app.get('/', (req, res) => {
 })
 
 /**
- * Récupération d'un utilisateur
+ * Récupération d'un utilisateur par un id
  */
 app.get('/user/:id', ((req, res) => {
-    const User = require('./models/user')
+    let User = require('./models/user')
 
-    const id = req.params.id
-    const user = User.getUserById(id)
+    let id = req.params.id
 
-    console.log(user)
-    if(user != undefined){
-        res.send(user).status(200)
-        console.log(user)
+    let result = User.getUserById(id)
+    console.log(result[1])
+    for (let i = 0; i < result.length; i++) {
+        console.log(result[i])
+    }
+
+    //console.log("Récupération user : " + result)
+    if(result != undefined){
+        res.send(result).status(200)
+        //console.log("récupération user :" + result)
     } else {
         console.log(res.status(404).end)
     }
