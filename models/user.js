@@ -38,28 +38,23 @@ class User{
       getUserById(id){
         let query = 'SELECT * FROM USER WHERE idUser = ?'
         let value = [id]
-        db.query(query, value).then((rows) =>{
 
+        db.query(query, value).then((rows) =>{
             this.idUser = rows[0].idUser
             this.nom = rows[0].nom
             this.prenom = rows[0].prenom
             this.email = rows[0].email
             this.dateInscription = rows[0].dateInscription
-
         })
-
     }
 
-    static deleteUser(id){
+
+    deleteUser(id){
         let query = 'DELETE FROM USER WHERE idUser = ?'
         let value = [id]
 
-        try{
-            db.query(query, value)
-            console.log("L'utilisateur " + id + " a bien été supprimé")
-        } catch (err){
-            throw err
-        }
+        db.query(query, value)
+        console.log("L'utilisateur " + id + " a bien été supprimé")
     }
 
 }

@@ -22,12 +22,11 @@ app.get('/user/:id', ((req, res) => {
 
     setTimeout(() => {
         console.log(User)
-        if(User != undefined){
+        if(User.idUser != undefined){
             res.send(User).status(200)
         } else {
-            console.log(res.status(404).end)
+            res.send("L'utilisateur " + id + " n'existe pas").status(404)
         }
-
     }, 300);
 
 
@@ -54,12 +53,20 @@ app.post('/newuser', (req, res) => {
  * Suppression d'un utilisateur
  */
 app.delete('/deleteuser/:id', (req, res) => {
-    let User = require('./models/user')
+    let Userjs = require('./models/user')
     let id = req.params.id
+    let User = new Userjs()
 
-    User.deleteUser(id)
-
-    res.send("L'utilisateur " + id + " a bien été supprimé").status(200)
+    User.getUserById(id)
+    setTimeout(() => {
+        console.log(User)
+        if(User.idUser != undefined){
+            User.deleteUser(id)
+            res.send("L'utilisateur " + id + " a bien été supprimé").status(200)
+        } else {
+            res.send("L'utilisateur " + id + " n'existe pas").status(404)
+        }
+    }, 300);
 })
 
 app.listen(port, function (){
