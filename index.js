@@ -49,6 +49,19 @@ app.post('/newuser', (req, res) => {
     res.json(req.body).status(200)
 })
 
+
+/**
+ * Suppression d'un utilisateur
+ */
+app.delete('/deleteuser/:id', (req, res) => {
+    let User = require('./models/user')
+    let id = req.params.id
+
+    User.deleteUser(id)
+
+    res.send("L'utilisateur " + id + " a bien été supprimé").status(200)
+})
+
 app.listen(port, function (){
     console.log("Server running on port " + port)
 })

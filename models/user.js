@@ -51,10 +51,15 @@ class User{
     }
 
     static deleteUser(id){
-        let query = 'DELETE * FROM USER WHERE idUser = ?'
+        let query = 'DELETE FROM USER WHERE idUser = ?'
         let value = [id]
 
-        db.query(query, value)
+        try{
+            db.query(query, value)
+            console.log("L'utilisateur " + id + " a bien été supprimé")
+        } catch (err){
+            throw err
+        }
     }
 
 }
