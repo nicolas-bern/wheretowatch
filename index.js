@@ -34,6 +34,33 @@ app.get('/user/:id', ((req, res) => {
 }))
 
 /**
+ * Modification d'un utilisateur par un id
+ */
+app.put('/modifuser/:id', ((req, res) => {
+    let Userjs = require('./models/user')
+    let id = req.params.id
+    let User = new Userjs()
+
+    let nom = req.body.nom
+    let prenom = req.body.prenom
+    let email = req.body.email
+    let mdp = req.body.mdp
+    User.modifUser(id, nom, prenom, email, mdp)
+
+    setTimeout(() => {
+        console.log(User)
+        if(User != undefined){
+            res.send("Modification terminé").status(200)
+        } else {
+            res.send("L'utilisateur " + id + " n'existe pas").status(404)
+        }
+    }, 300);
+
+
+
+}))
+
+/**
  * Création d'un nouvel utilisateur
  */
 app.post('/newuser', (req, res) => {

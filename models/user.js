@@ -3,11 +3,12 @@ let { v4: uuidv4 } = require('uuid');
 
 class User{
 
-    constructor(idUser, nom, prenom, email, dateInscription){
+    constructor(idUser, nom, prenom, email, mdp, dateInscription){
         this.idUser = idUser
         this.nom = nom
         this.prenom = prenom
         this.email = email
+        this.mdp = mdp
         this.dateInscription = dateInscription
     }
 
@@ -28,6 +29,18 @@ class User{
         let query = "SELECT * FROM USER ORDER BY dateInscription ASC"
 
         db.query(query)
+    }
+
+    modifUser(id, nom, prenom, email, mdp){
+        let query = 'UPDATE USER SET nom = ?, prenom = ?, email = ?, mdp = ? WHERE idUser = ?'
+        let values = [nom, prenom, email, mdp, id]
+
+        try {
+            db.query(query, values)
+            console.log("Modification effectué")
+        } catch (err){
+            throw err
+        }
     }
 
 
