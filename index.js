@@ -4,6 +4,7 @@ const port = 8081
 const { v4: uuidv4} = require('uuid')
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(express.static('public'))
 
 
 app.get('/', (req, res) => {
@@ -29,14 +30,12 @@ app.get('/user/:id', ((req, res) => {
         }
     }, 300);
 
-
-
 }))
 
 /**
  * Modification d'un utilisateur par un id
  */
-app.put('/modifuser/:id', ((req, res) => {
+app.patch('/modifuser/:id', ((req, res) => {
     let Userjs = require('./models/user')
     let id = req.params.id
     let User = new Userjs()
@@ -51,7 +50,7 @@ app.put('/modifuser/:id', ((req, res) => {
         console.log(User)
         if(User.idUser != undefined){
             User.modifUser(id, nom, prenom, email, mdp)
-            res.json(req.body).status(200)
+            res.json(req.body).status(201)
         } else {
             res.send("L'utilisateur " + id + " n'existe pas").status(404)
         }
@@ -68,11 +67,14 @@ app.post('/newuser', (req, res) => {
     let prenom = req.body.prenom
     let email = req.body.email
     let mdp = req.body.mdp
-    if(nom == "" || prenom == "" || email == "" || mdp == ""){
+    let isAdmin = req.body.isAdmin
+    console.log(isAdmin)
+    console.log(req.body.isAdmin)
+    if(nom == "" || prenom == "" || email == "" || mdp == "" || isAdmin == undefined){
         res.send("Veuillez remplir toutes les informations nécessaires")
     } else {
-        User.createUser(nom, prenom, email, mdp)
-        res.json(req.body).status(200)
+        User.createUser(nom, prenom, email, mdp, isAdmin)
+        res.json(req.body).status(201)
     }
 })
 

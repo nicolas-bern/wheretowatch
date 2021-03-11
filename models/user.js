@@ -3,19 +3,22 @@ let { v4: uuidv4 } = require('uuid');
 
 class User{
 
-    constructor(idUser, nom, prenom, email, mdp, dateInscription){
+    constructor(idUser, nom, prenom, email, mdp, dateInscription, isAdmin){
         this.idUser = idUser
         this.nom = nom
         this.prenom = prenom
         this.email = email
         this.mdp = mdp
         this.dateInscription = dateInscription
+        this.isAdmin = isAdmin
     }
 
 
-    static createUser(nom, prenom, email, mdp){
-        let query = 'INSERT INTO USER(idUser, nom, prenom, email, mdp, dateInscription) VALUE (?, ?, ?, ?, ?, ?)'
-        let values = [uuidv4(), nom, prenom, email, mdp, new Date()]
+    static createUser(nom, prenom, email, mdp, isAdmin){
+        console.log(isAdmin)
+
+        let query = 'INSERT INTO USER(idUser, nom, prenom, email, mdp, dateInscription, isAdmin) VALUE (?, ?, ?, ?, ?, ?, ?)'
+        let values = [uuidv4(), nom, prenom, email, mdp, new Date(), isAdmin]
 
         try {
             db.query(query, values)
