@@ -58,12 +58,12 @@ app.get('/users/:id', ((req, res) => {
 app.get('/users/', ((req, res) => {
     let Userjs = require('./models/user')
 
-    test = Userjs.getAllUser()
+    let users = Userjs.getAllUser()
 
     setTimeout(() => {
-        console.log(test)
-        if(test != undefined){
-            res.send(test).status(200)
+        console.log(users)
+        if(users != undefined){
+            res.send(users).status(200)
         } else {
             res.send("Crash").status(404)
         }
@@ -110,8 +110,7 @@ app.post('/users/', (req, res) => {
     let email = req.body.email
     let mdp = req.body.mdp
     let isAdmin = req.body.isAdmin
-    console.log(isAdmin)
-    console.log(req.body.isAdmin)
+
     if(nom == "" || prenom == "" || email == "" || mdp == "" || isAdmin == undefined){
         res.send("Veuillez remplir toutes les informations nécessaires")
     } else {
