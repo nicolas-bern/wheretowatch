@@ -31,8 +31,10 @@ class User{
 
 
     modifUser(id, nom, prenom, email, mdp, isAdmin){
+
+
         let query = 'UPDATE USER SET nom = ?, prenom = ?, email = ?, mdp = ?, isAdmin = ? WHERE idUser = ?'
-        let values = [nom, prenom, email, mdp, id, isAdmin]
+        let values = [nom, prenom, email, mdp, isAdmin, id]
 
         try {
             db.query(query, values)

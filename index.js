@@ -76,7 +76,7 @@ app.get('/users/', ((req, res) => {
 /**
  * Modification d'un utilisateur par un id
  */
-app.patch('/users/:id', ((req, res) => {
+app.put('/users/:id', ((req, res) => {
     let Userjs = require('./models/user')
     let id = req.params.id
     let User = new Userjs()
