@@ -87,10 +87,22 @@ class User{
         console.log("L'utilisateur " + id + " a bien été supprimé")
     }
 
-    loginUser(){
+    loginUser(email, mdp){
         let query = 'SELECT * FROM USER WHERE email = ? AND mdp = ?'
         let value = [email, mdp]
-        db.query(query, value)
+        db.query(query, value).then((rows) => {
+            if (rows.length != null){
+                this.idUser = rows[0].idUser
+                this.nom = rows[0].nom
+                this.prenom = rows[0].prenom
+                this.email = rows[0].email
+                this.dateInscription = rows[0].dateInscription
+                this.isAdmin = rows[0].isAdmin
+            }else {
+                return false
+            }
+
+        })
       }
 
 }

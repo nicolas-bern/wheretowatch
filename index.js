@@ -20,14 +20,14 @@ app.get('/login/', ((req, res) => {
 
     let email = req.body.email
     let mdp = req.body.mdp
-    User
+    User.loginUser(email, mdp)
 
     setTimeout(() => {
-        console.log(User)
-        if(User.idUser != undefined){
+
+        if(User != undefined){
             res.send(User).status(200)
         } else {
-            res.send("L'utilisateur " + id + " n'existe pas").status(404)
+            res.send("L'utilisateur n'existe pas").status(404)
         }
     }, 300);
 
