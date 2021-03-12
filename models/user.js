@@ -25,11 +25,7 @@ class User{
         }
     }
 
-    static getAllUser(){
-        let query = "SELECT * FROM USER ORDER BY dateInscription ASC"
 
-        db.query(query)
-    }
 
     modifUser(id, nom, prenom, email, mdp){
         let query = 'UPDATE USER SET nom = ?, prenom = ?, email = ?, mdp = ? WHERE idUser = ?'
@@ -58,9 +54,27 @@ class User{
             this.prenom = rows[0].prenom
             this.email = rows[0].email
             this.dateInscription = rows[0].dateInscription
+            console.log(rows)
         })
     }
 
+    static getAllUser(){
+        let query = "SELECT * FROM USER ORDER BY dateInscription ASC"
+
+        let array = []
+        db.query(query).then(res => {
+            for (var i = 0; i < res.length; i++) {
+                let object = {}
+                object['idUser'] = res[i].idUser
+                object['nom'] = res[i].nom
+                object['prenom'] = res[i].prenom
+                object['email'] = res[i].email
+                object['dateInscription'] = res[i].dateInscription
+                array.push(object)
+            }
+        })
+        return array
+    }
 
     deleteUser(id){
         let query = 'DELETE FROM USER WHERE idUser = ?'

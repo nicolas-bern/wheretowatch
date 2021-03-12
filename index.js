@@ -32,11 +32,31 @@ app.get('/user/:id', ((req, res) => {
 
 
 }))
+/**
+ * Récupération des utilisateur
+ */
+app.get('/users/', ((req, res) => {
+    let Userjs = require('./models/user')
+
+    test = Userjs.getAllUser()
+
+    setTimeout(() => {
+        console.log(test)
+        if(test != undefined){
+            res.send(test).status(200)
+        } else {
+            res.send("Crash").status(404)
+        }
+    }, 3000);
+
+
+
+}))
 
 /**
  * Modification d'un utilisateur par un id
  */
-app.put('/modifuser/:id', ((req, res) => {
+app.patch('/modifuser/:id', ((req, res) => {
     let Userjs = require('./models/user')
     let id = req.params.id
     let User = new Userjs()
