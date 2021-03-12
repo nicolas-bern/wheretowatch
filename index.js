@@ -12,6 +12,27 @@ app.get('/', (req, res) => {
 })
 
 /**
+ * Login
+ */
+app.get('/login/', ((req, res) => {
+    let Userjs = require('./models/user')
+    let User = new Userjs()
+
+    let email = req.body.email
+    let mdp = req.body.mdp
+    User
+
+    setTimeout(() => {
+        console.log(User)
+        if(User.idUser != undefined){
+            res.send(User).status(200)
+        } else {
+            res.send("L'utilisateur " + id + " n'existe pas").status(404)
+        }
+    }, 300);
+
+}))
+/**
  * Récupération d'un utilisateur par un id
  */
 app.get('/user/:id', ((req, res) => {
@@ -46,7 +67,7 @@ app.get('/users/', ((req, res) => {
         } else {
             res.send("Crash").status(404)
         }
-    }, 3000);
+    }, 300);
 
 
 

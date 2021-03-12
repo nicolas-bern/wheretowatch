@@ -87,6 +87,12 @@ class User{
         console.log("L'utilisateur " + id + " a bien été supprimé")
     }
 
+    loginUser(){
+        let query = 'SELECT * FROM USER WHERE email = ? AND mdp = ?'
+        let value = [email, mdp]
+        db.query(query, value)
+      }
+
 }
 
 module.exports = User
