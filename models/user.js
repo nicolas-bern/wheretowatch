@@ -99,6 +99,7 @@ class User{
                 this.nom = rows[0].nom
                 this.prenom = rows[0].prenom
                 this.email = rows[0].email
+                this.mdp = rows[0].mdp
                 this.dateInscription = rows[0].dateInscription
                 this.isAdmin = rows[0].isAdmin
             }else {

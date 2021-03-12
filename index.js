@@ -23,8 +23,8 @@ app.get('/login/', ((req, res) => {
     User.loginUser(email, mdp)
 
     setTimeout(() => {
-
-        if(User != undefined){
+        console.log(User)
+        if(User.idUser != undefined){
             res.send(User).status(200)
         } else {
             res.send("L'utilisateur n'existe pas").status(404)
