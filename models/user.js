@@ -30,9 +30,9 @@ class User{
 
 
 
-    modifUser(id, nom, prenom, email, mdp){
-        let query = 'UPDATE USER SET nom = ?, prenom = ?, email = ?, mdp = ? WHERE idUser = ?'
-        let values = [nom, prenom, email, mdp, id]
+    modifUser(id, nom, prenom, email, mdp, isAdmin){
+        let query = 'UPDATE USER SET nom = ?, prenom = ?, email = ?, mdp = ?, isAdmin = ? WHERE idUser = ?'
+        let values = [nom, prenom, email, mdp, id, isAdmin]
 
         try {
             db.query(query, values)
@@ -73,6 +73,7 @@ class User{
                 object['prenom'] = res[i].prenom
                 object['email'] = res[i].email
                 object['dateInscription'] = res[i].dateInscription
+                object['isAdmin'] = rows[i].isAdmin
                 array.push(object)
             }
         })

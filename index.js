@@ -85,12 +85,13 @@ app.patch('/users/:id', ((req, res) => {
     let prenom = req.body.prenom
     let email = req.body.email
     let mdp = req.body.mdp
+    let admin = req.body.isAdmin
     User.getUserById(id)
 
     setTimeout(() => {
         console.log(User)
         if(User.idUser != undefined){
-            User.modifUser(id, nom, prenom, email, mdp)
+            User.modifUser(id, nom, prenom, email, mdp, admin)
             res.json(req.body).status(201)
         } else {
             res.send("L'utilisateur " + id + " n'existe pas").status(404)
