@@ -35,7 +35,7 @@ app.get('/login/', ((req, res) => {
 /**
  * Récupération d'un utilisateur par un id
  */
-app.get('/user/:id', ((req, res) => {
+app.get('/users/:id', ((req, res) => {
     let Userjs = require('./models/user')
     let id = req.params.id
     let User = new Userjs()
@@ -76,7 +76,7 @@ app.get('/users/', ((req, res) => {
 /**
  * Modification d'un utilisateur par un id
  */
-app.patch('/modifuser/:id', ((req, res) => {
+app.patch('/users/:id', ((req, res) => {
     let Userjs = require('./models/user')
     let id = req.params.id
     let User = new Userjs()
@@ -101,7 +101,7 @@ app.patch('/modifuser/:id', ((req, res) => {
 /**
  * Création d'un nouvel utilisateur
  */
-app.post('/newuser', (req, res) => {
+app.post('/users/', (req, res) => {
     let User = require('./models/user')
 
     let nom = req.body.nom
@@ -123,7 +123,7 @@ app.post('/newuser', (req, res) => {
 /**
  * Suppression d'un utilisateur
  */
-app.delete('/deleteuser/:id', (req, res) => {
+app.delete('/users/:id', (req, res) => {
     let Userjs = require('./models/user')
     let id = req.params.id
     let User = new Userjs()
