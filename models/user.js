@@ -73,7 +73,7 @@ class User{
                 object['prenom'] = res[i].prenom
                 object['email'] = res[i].email
                 object['dateInscription'] = res[i].dateInscription
-                object['isAdmin'] = rows[i].isAdmin
+                object['isAdmin'] = res[i].isAdmin
                 array.push(object)
             }
         })
